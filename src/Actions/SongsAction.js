@@ -1,4 +1,4 @@
-import axios from 'axios';
+import AxiosInstance from 'axios';
 import { notify } from 'react-notify-toast';
 
 const BASE_URL='http://localhost:5000/song'
@@ -22,7 +22,7 @@ export const SetSongs=(response)=>{
 // post Action
 export const AddSongAction=(data)=>{
     return async (dispatch)=>{
-        await axios.post(`${BASE_URL}/songs`, data)
+        await AxiosInstance.post(`${BASE_URL}/songs`, data)
         .then(response=>{
             dispatch(Add_song(response));
             notify.show(response.data.message, 'success', 3000)
@@ -35,7 +35,7 @@ export const AddSongAction=(data)=>{
 // Fetch action
 export const FetchSongAction=(data)=>{
     return async (dispatch)=>{
-        await axios.get(`${BASE_URL}/songs`, data)
+        await AxiosInstance.get(`${BASE_URL}/songs`, data)
         .then(response=>{
             dispatch(SetSongs(response));
             notify.show(response.data.message, 'success', 3000)
