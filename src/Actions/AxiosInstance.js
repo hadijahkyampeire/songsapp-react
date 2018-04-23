@@ -9,6 +9,7 @@ Axiosinstance.interceptors.request.use( config => {
     if(AUTH_TOKEN) {
         if(config.method !== 'OPTIONS') {
             config.headers.AUTHORIZATION = `Bearer ${AUTH_TOKEN}`;
+
         }
     }
     return config

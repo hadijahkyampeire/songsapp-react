@@ -23,7 +23,6 @@ export const SignupAction =(data)=>{
         await axios.post(`${BASE_URL}/auth/register`, data)
         .then(response=>{
             dispatch(Signup(response));
-            localStorage.setItem('token', response.data.access_token)
             notify.show(response.data.message, 'success', 4000)
             window.location.assign('/login')
             console.log(response)
@@ -44,8 +43,10 @@ export const LoginAction =(data)=>{
         await axios.post(`${BASE_URL}/auth/login`, data)
         .then(response=>{
             dispatch(Login(response));
+            localStorage.setItem('token', response.data.access_token)
             notify.show(response.data.message, 'success', 4000)
-            window.location.assign('/add')
+            window.location.assign('/dashboard')
+            console.log(response)
         }).catch(error=>{
             if(error.response){
                 notify.show(error.response.data.message, 'error', 4000)

@@ -1,4 +1,4 @@
-import AxiosInstance from 'axios';
+import Axiosinstance from './AxiosInstance';
 import { notify } from 'react-notify-toast';
 
 const BASE_URL='http://localhost:5000/song'
@@ -22,12 +22,18 @@ export const SetSongs=(response)=>{
 // post Action
 export const AddSongAction=(data)=>{
     return async (dispatch)=>{
-        await AxiosInstance.post(`${BASE_URL}/songs`, data)
+        await Axiosinstance.post(`${BASE_URL}/songs`, data)
         .then(response=>{
             dispatch(Add_song(response));
+            document.getElementById("CloseAddModal").click();
             notify.show(response.data.message, 'success', 3000)
         }).catch(error=>{
-            notify.show('error occured', 'error', 3000)
+            if(error.response){
+                notify.show(error.response.data.messages.artist, 'error', 4000)
+
+            }else if(error.request){
+                notify.show('Request errored', 'error', 4000)
+            }
         });
     }
 }
@@ -35,7 +41,7 @@ export const AddSongAction=(data)=>{
 // Fetch action
 export const FetchSongAction=(data)=>{
     return async (dispatch)=>{
-        await AxiosInstance.get(`${BASE_URL}/songs`, data)
+        await Axiosinstance.get(`${BASE_URL}/songs`, data)
         .then(response=>{
             dispatch(SetSongs(response));
             notify.show(response.data.message, 'success', 3000)
