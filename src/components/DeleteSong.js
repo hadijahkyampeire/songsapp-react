@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const DeleteSong =(props)=>(
     <div className="modal fade" id={`delete_song${props.id}`} 
     tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -16,7 +17,7 @@ const DeleteSong =(props)=>(
        </div>
        <div className="modal-footer">
          <button type="button" className="btn btn-secondary" data-dismiss="modal" id={`closeModel${props.id}`}>Close</button>
-         <button type="button" className="btn btn-danger" onClick={props.deletesong} to={`#`}>Delete</button>
+         <button type="button" className="btn btn-danger"onClick={()=>props.delete(props.id)} to={`#`}>Delete</button>
        </div>
      </div>
    </div>

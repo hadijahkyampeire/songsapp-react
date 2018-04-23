@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
-import {FetchSongAction} from '../Actions/SongsAction';
+import {FetchSongAction, DeleteSongAction} from '../Actions/SongsAction';
 import {Link} from 'react-router-dom';
 import CreateSong from './CreateSong';
 import DeleteSong from './DeleteSong';
@@ -29,8 +29,8 @@ const Song=(props)=>(
     </div>
   </div>
   </div>
-  <DeleteSong id={props.id} title={props.title} artist={props.artist}/>
-  <EditSong id={props.id} title={props.title} artist={props.artist}/>
+  <DeleteSong id={props.id} title={props.title} artist={props.artist} delete={props.delete}/>
+  <EditSong id={props.id} title={props.title} artist={props.artist} />
   </div>
 )
 
@@ -39,6 +39,7 @@ class Dashboard extends Component{
     componentDidMount(){
         this.props.FetchSongAction()
     }
+
     render(){
         const {songs} = this.props;
         const items = songs.song_items
@@ -54,7 +55,8 @@ class Dashboard extends Component{
                 artist={song.artist}
                 title={song.title}
                 created_by={song.created_by}
-                key={song.id}/>);
+                key={song.id}
+                delete={this.props.DeleteSongAction}/>);
             return(
                 <div>
                     <CreateSong />
@@ -74,5 +76,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {FetchSongAction})(Dashboard);
+export default connect(mapStateToProps, {FetchSongAction, DeleteSongAction})(Dashboard);
 // export default Dashboard;

@@ -1,4 +1,6 @@
 import React ,{Component}from 'react';
+import {connect}  from 'react-redux';
+import {EditSongAction, FetchSongAction} from '../Actions/SongsAction';
 
 /**
  * Component for handling editing categories.
@@ -14,6 +16,9 @@ class EditSong extends Component {
      */
     handleEditCategory =(event) =>{
         event.preventDefault();
+        const {title, artist} = this.state
+        this.props.EditSongAction({title, artist})
+        .then(this.props.FetchSongAction)
     }
     handleInput =(event) =>{
         const {name, value} = event.target;
@@ -70,4 +75,4 @@ class EditSong extends Component {
         );
     }
 }
-export default EditSong;
+export default connect(null, {EditSongAction, FetchSongAction})(EditSong);

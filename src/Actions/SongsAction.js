@@ -50,3 +50,31 @@ export const FetchSongAction=(data)=>{
         });
     }
 }
+
+// delete action
+export const DeleteSongAction=(id)=>{
+    return async (dispatch)=>{
+        await Axiosinstance.delete(`${BASE_URL}/songs/${id}`)
+        .then(response=>{
+            dispatch(SetSongs(response));
+            notify.show(response.data.message, 'success', 3000)
+        }).catch(error=>{
+            notify.show('error occured', 'error', 3000)
+        });
+    }
+}
+
+// edit action
+export const EditSongAction=(id, data)=>{
+    return async (dispatch)=>{
+        await Axiosinstance.put(`${BASE_URL}/songs/${id}`)
+        .then(response=>{
+            dispatch(SetSongs(response));
+            notify.show(response.data.message, 'success', 3000)
+        }).catch(error=>{
+            notify.show('error occured', 'error', 3000)
+        });
+
+    }
+
+}
