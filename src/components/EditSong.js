@@ -11,13 +11,17 @@ class EditSong extends Component {
         title:'',
         artist:''
     }
+    componentDidMount(){
+        this.setState({title:this.props.title});
+        this.setState({artist:this.props.artist});
+    }
     /**
      * @param {object} event - The element which handles edit category
      */
     handleEditCategory =(event) =>{
         event.preventDefault();
         const {title, artist} = this.state
-        this.props.EditSongAction({title, artist})
+        this.props.EditSongAction(this.props.id, {title, artist})
         .then(this.props.FetchSongAction)
     }
     handleInput =(event) =>{
@@ -57,16 +61,16 @@ class EditSong extends Component {
                   )}
                             <div className="form-group">
                                 <input type="text" name="title" value={this.state.title}
-                                placeholder="song title"  onChange={this.handleInput} className='form-control' />
+                                 onChange={this.handleInput} className='form-control' />
                             </div>
                             <div className="form-group">
                                 <input type="text" name="artist" value={this.state.artist}
-                                placeholder="song artist" onChange={this.handleInput} className='form-control' />
+                                onChange={this.handleInput} className='form-control' />
                             </div>
                         </div>
                         <div className="modal-footer">
                             <button type="submit" className="btn btn-primary" >Update</button>
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal" id={`close${this.props.id}`}>Cancel</button>
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal" id={`closeEditModal${this.props.id}`}>Cancel</button>
                         </div>
                         </form>
                     </div>

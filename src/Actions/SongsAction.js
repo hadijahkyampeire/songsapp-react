@@ -56,6 +56,7 @@ export const DeleteSongAction=(id)=>{
     return async (dispatch)=>{
         await Axiosinstance.delete(`${BASE_URL}/songs/${id}`)
         .then(response=>{
+            document.getElementById(`closeDeleteModal${id}`).click();
             dispatch(SetSongs(response));
             notify.show(response.data.message, 'success', 3000)
         }).catch(error=>{
@@ -67,8 +68,9 @@ export const DeleteSongAction=(id)=>{
 // edit action
 export const EditSongAction=(id, data)=>{
     return async (dispatch)=>{
-        await Axiosinstance.put(`${BASE_URL}/songs/${id}`)
+        await Axiosinstance.put(`${BASE_URL}/songs/${id}`, data)
         .then(response=>{
+            document.getElementById(`closeEditModal${id}`).click();
             dispatch(SetSongs(response));
             notify.show(response.data.message, 'success', 3000)
         }).catch(error=>{

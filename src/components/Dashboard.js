@@ -29,7 +29,7 @@ const Song=(props)=>(
     </div>
   </div>
   </div>
-  <DeleteSong id={props.id} title={props.title} artist={props.artist} delete={props.delete}/>
+  <DeleteSong id={props.id} title={props.title} artist={props.artist} delete={props.delete} getsongs={props.getsongs}/>
   <EditSong id={props.id} title={props.title} artist={props.artist} />
   </div>
 )
@@ -56,7 +56,8 @@ class Dashboard extends Component{
                 title={song.title}
                 created_by={song.created_by}
                 key={song.id}
-                delete={this.props.DeleteSongAction}/>);
+                delete={this.props.DeleteSongAction}
+                getsongs={this.props.FetchSongAction}/>);
             return(
                 <div>
                     <CreateSong />

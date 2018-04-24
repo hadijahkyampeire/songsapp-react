@@ -16,8 +16,8 @@ const DeleteSong =(props)=>(
          <h5>Are you sure you want to delete <strong> {props.title} </strong> song? Deleting it will lead to loss of recipes within it</h5>
        </div>
        <div className="modal-footer">
-         <button type="button" className="btn btn-secondary" data-dismiss="modal" id={`closeModel${props.id}`}>Close</button>
-         <button type="button" className="btn btn-danger"onClick={()=>props.delete(props.id)} to={`#`}>Delete</button>
+         <button type="button" className="btn btn-secondary" data-dismiss="modal" id={`closeDeleteModal${props.id}`}>Close</button>
+         <button type="button" className="btn btn-danger"onClick={()=>{ props.delete(props.id); props.getsongs();}} to={`#`}>Delete</button>
        </div>
      </div>
    </div>
